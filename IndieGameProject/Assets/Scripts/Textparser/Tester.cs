@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TextParser;
+﻿using TextParser;
 using UnityEngine;
+
 
 public class Tester : MonoBehaviour
 {

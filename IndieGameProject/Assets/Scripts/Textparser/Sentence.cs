@@ -29,12 +29,12 @@ namespace TextParser
                         lineBuilder.Append(Spacing);
                         break;
                     case '|':
-                        _keywords.Add(keywordBuilder.ToString());
+                        _keywords.Add(keywordBuilder.ToString().Trim());
                         keywordBuilder.Clear();
                         break;
                     case ']':
                         inKey = false;
-                        _keywords.Add(keywordBuilder.ToString());
+                        _keywords.Add(keywordBuilder.ToString().Trim());
                         break;
                     default:
                     {
@@ -44,7 +44,7 @@ namespace TextParser
                     }
                 }
             }
-
+            
             _line = lineBuilder.ToString();
         }
 
