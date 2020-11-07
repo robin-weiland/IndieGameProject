@@ -1,6 +1,7 @@
 #! /bin/sh
+# https://download.unity3d.com/download_unity/698c1113cef0/UnityDownloadAssistant.dmg
 
-BASE_URL=https://netstorage.unity3d.com/unity
+BASE_URL=https://download.unity3d.com/download_unity
 HASH=698c1113cef0
 VERSION=2020.1.11
 
