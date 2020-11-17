@@ -15,7 +15,7 @@ namespace TextParser
 
         public StoryFileParser(TextAsset file)
         {
-            _sentences = file.text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).Select(line => new Sentence(line)).ToArray();
+            _sentences = file.text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).Select(line => new Sentence(line)).ToArray();
             _curIndex = -1;
             _curSentence = null;
         }
@@ -39,4 +39,3 @@ namespace TextParser
         public void Dispose() { }
     }
 }
-
