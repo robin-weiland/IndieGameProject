@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using General;
 using Path;
-using UnityEditor.Experimental;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,53 +12,54 @@ namespace Player
         public PlayerProperties properties = new PlayerProperties();
 
         private int _elapsedFrames;
+        private bool _seenOnce;
 
         private void Start()
         {
             foreach (Transform child in properties.pathway.transform)
-                properties.path.Add(child.gameObject.GetComponent<Point>());
+                properties.Path.Add(child.gameObject.GetComponent<Point>());
 
-            if (properties.path.Count < 1) throw new ArgumentException("Pathway invalid!");
-            gameObject.transform.position = properties.path[properties.CurrentPoint].Location;
-            
+            if (properties.Path.Count < 1) throw new ArgumentException("Pathway empty!");
+            gameObject.transform.position = properties.Path[properties.CurrentPoint].Location;
         }
 
         private void FixedUpdate()
         {
-            if (properties.CurrentPoint == properties.path.Count) return;
+            if (properties.CurrentPoint == properties.Path.Count) return;
             
-            properties.path[properties.CurrentPoint].reached = true;
+            properties.Path[properties.CurrentPoint].Reached = true;
             
-            if (properties.path[properties.CurrentPoint].isWord)
-                foreach (var label in properties.path[properties.CurrentPoint].wordController.labels)
+            if (properties.Path[properties.CurrentPoint].isEnd)
+                SceneManager.LoadScene(1 - SceneManager.GetActiveScene().buildIndex);
+            
+            if (properties.Path[properties.CurrentPoint].IsWord)
+                foreach (var label in properties.Path[properties.CurrentPoint].wordController.labels)
                     label.gameObject.SetActive(true);
             
-            switch (properties.path[properties.CurrentPoint].IsActive())
+            switch (properties.Path[properties.CurrentPoint].IsActive())
             {
                 case -1:
-                    CameraBehaviour.Shake(0.4f, 0.25f);
+                    // CameraBehaviour.Shake(0.4f, 0.25f);
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     return;
                 case 0: return;
                 case 1:
                     break;
             }
-            
-            if (properties.path[properties.CurrentPoint].lerpTimer == 0) Debug.Log(properties.CurrentPoint);
-            var interpolationRatio = _elapsedFrames / properties.path[properties.CurrentPoint].lerpTimer;
+            var interpolationRatio = _elapsedFrames / properties.Path[properties.CurrentPoint].LerpTimer;
             
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
-                                                         properties.path[properties.CurrentPoint].Location,
+                                                         properties.Path[properties.CurrentPoint].Location,
                                                           interpolationRatio
             );
             
-            _elapsedFrames = (_elapsedFrames + 1) % (properties.path[properties.CurrentPoint].lerpTimer + 1);
+            _elapsedFrames = (_elapsedFrames + 1) % (properties.Path[properties.CurrentPoint].LerpTimer + 1);
 
             if (_elapsedFrames > 0) return;
             
-            properties.path[properties.CurrentPoint].reached = false;
-            if (properties.path[properties.CurrentPoint].isWord)
-                foreach (var label in properties.path[properties.CurrentPoint].wordController.labels)
+            properties.Path[properties.CurrentPoint].Reached = false;
+            if (properties.Path[properties.CurrentPoint].IsWord)
+                foreach (var label in properties.Path[properties.CurrentPoint].wordController.labels)
                     label.gameObject.SetActive(false);
             properties.CurrentPoint++;
         }

@@ -7,18 +7,20 @@ namespace Path
     {
         [SerializeField]
         [Range(0, 100)]
-        public int localLerpTime = 100;
+        public int localLerpTime;
 
-        public WordController.WordController wordController = null;
+        public WordController.WordController wordController;
 
-        public int lerpTimer;
+        public int LerpTimer { get; private set; }
 
-        protected int Active  = 1;
-        public bool reached = false;
+        protected int Active = 1;
+        public bool Reached { get; set; }
 
-        public Vector3 Location { private set; get; }
+        public Vector3 Location { get; private set; }
+        
+        public bool IsWord { get; protected set; }
 
-        public bool isWord = false;
+        public bool isEnd;
 
         private void Start()
         {
@@ -27,13 +29,13 @@ namespace Path
 
         protected void _Start()
         {
-            lerpTimer = localLerpTime > 0 ? localLerpTime : GetComponentInParent<Pathway>().globalLerpTime;
+            LerpTimer = localLerpTime > 0 ? localLerpTime : GetComponentInParent<Pathway>().globalLerpTime;
             Location = gameObject.transform.position;
         }
 
         public override string ToString()
         {
-            return $"Point at [{Location.x}, {Location.y}, {Location.z}] with lerp time of {lerpTimer}";
+            return $"Point at [{Location.x}, {Location.y}, {Location.z}] with lerp time of {LerpTimer}";
         }
 
         public int IsActive()

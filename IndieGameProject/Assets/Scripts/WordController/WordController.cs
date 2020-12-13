@@ -11,7 +11,7 @@ namespace WordController
         private StringBuilder _word;
         public List<string> words;
         public List<Text> labels;
-        public int status;
+        public int Status { get; private set; }
     
         private void Start()
         {
@@ -20,7 +20,6 @@ namespace WordController
     
         private void Update()
         {
-            // if (!GetComponentInParent<Point>()) return;
             foreach (var c in Input.inputString)
                 switch (c)
                 {
@@ -35,21 +34,19 @@ namespace WordController
                         _word.Append(c);
                         break;
                 }
-
             
-
             foreach (var word in words)
             {
-                if (word == (_word.ToString()))
+                if (word == _word.ToString())
                 {
-                    status = 1;
+                    Status = 1;
                     return;
                 }
                 if (!word.StartsWith(_word.ToString())) continue;
-                status = 0;
+                Status = 0;
                 return;
             }
-            status = -1;
+            Status = -1;
         }
     }
 }

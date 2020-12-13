@@ -1,26 +1,24 @@
-﻿using UnityEditor;
-using UnityEditorInternal;
-using UnityEngine;
-
-namespace Path
+﻿namespace Path
 {
     public class WordPoint : Point
     {
-        // [SerializeField]
-        // public WordController.WordController wordController;
-
+        public CountdownTimer countdownTimer;
         private void Start()
         {
             _Start();
             foreach (var label in wordController.labels)
                 label.gameObject.SetActive(false);
-            isWord = true;
+            IsWord = true;
             Active = 0;
+            countdownTimer.gameObject.SetActive(false);
         }
 
         private void Update()
         {
-            if (reached) Active = wordController.status;
+            if (!Reached) return;
+            countdownTimer.gameObject.SetActive(true);
+            // GetComponent<TimeBar>().gameObject.SetActive(true);
+            Active = wordController.Status;
         }
     }
 }
