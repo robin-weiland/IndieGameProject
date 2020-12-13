@@ -6,12 +6,6 @@ namespace General
 {
     public class CameraBehaviour : MonoBehaviour
     {
-        //Follow
-        public GameObject player;
-        private bool _cameraStop;
-        public float minX;
-        public float maxX;
-
         //Shake
         private static CameraBehaviour _instance;
         private Vector3 _originalPos;
@@ -23,32 +17,9 @@ namespace General
         {
             _instance = this;
         }
-
-        private void Start()
+        
+        private void Update()
         {
-            _cameraStop = false;
-        }
-        void Update()
-        {
-            //Follow
-            // if(player.transform.position.x > minX && player.transform.position.x < maxX) {
-            //     _cameraStop = false;
-            // } else {
-            //     _cameraStop = true;
-            // }
-            //
-            // //CameraFollow X
-            // if (!_cameraStop)
-            // {
-            //     transform.position = new Vector3(player.transform.position.x, transform.position.y, -10);
-            // }
-            //
-            // //CameraFollow Y is always active
-            // transform.position = new Vector3(this.transform.position.x, player.transform.position.y + 2, -10);
-
-
-            //Shake
-            // Calculate a fake delta time, so we can Shake while game is paused.
             _timeAtCurrentFrame = Time.realtimeSinceStartup;
             _fakeDelta = _timeAtCurrentFrame - _timeAtLastFrame;
             _timeAtLastFrame = _timeAtCurrentFrame;

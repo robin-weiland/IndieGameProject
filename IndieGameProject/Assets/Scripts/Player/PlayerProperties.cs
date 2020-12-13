@@ -9,20 +9,11 @@ namespace Player
     [Serializable]
     public class PlayerProperties
     {
-        [SerializeField]
-        [Header("Movement")]
-        public float movementSpeed;
-
-        [Header("Spawn")]
-        public Transform spawnPoint;
-
-        [Header("Path")]
-        public List<Point> paths;
-
         [Header("Pathway")]
         public Pathway pathway;
 
-        public List<Point> path;
+        [NonSerialized]
+        public List<Point> Path = new List<Point>();
         
         [NonSerialized]
         public int CurrentPoint = 0;

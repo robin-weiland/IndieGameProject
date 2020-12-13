@@ -17,4 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ThirdLevel.unity
     guid: b8eafad4f61698c49a2ac9cf2a45b2bf
+    path: Assets/Scenes/ShittyDemo.unity
+    guid: eaa7c42a599756949b49311a3361ff77
+  - enabled: 1
+    path: Assets/Scenes/ShittyDemo2.unity
+    guid: 50db61591e6842647ae547612adae487
   m_configObjects: {}
