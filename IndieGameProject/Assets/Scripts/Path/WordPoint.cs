@@ -10,13 +10,13 @@
                 label.gameObject.SetActive(false);
             IsWord = true;
             Active = 0;
-            countdownTimer.gameObject.SetActive(false);
+            //countdownTimer.gameObject.SetActive(false);
         }
 
         private void Update()
         {
             if (!Reached) return;
-            countdownTimer.gameObject.SetActive(true);
+            //countdownTimer.gameObject.SetActive(true);
             // GetComponent<TimeBar>().gameObject.SetActive(true);
             Active = wordController.Status;
         }
