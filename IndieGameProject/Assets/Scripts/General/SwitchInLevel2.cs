@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SwitchLevels : MonoBehaviour
+public class SwitchInLevel2 : MonoBehaviour
 {
     public int index;
-    public float playerEndPositionX;
     private GameObject player;
-
+    // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Run_01");
-        playerEndPositionX = 22.85f;
+        player = GameObject.Find("Jump04");
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.x >= playerEndPositionX)
+        if(player.transform.position.y <= -2.7f)
         {
             SceneManager.LoadScene(index);
         }
